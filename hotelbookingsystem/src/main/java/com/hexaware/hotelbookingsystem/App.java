@@ -14,7 +14,6 @@ public class App
 		
 				System.out.println(session);
 				
-				
 				//Transaction tr = session.beginTransaction();
     }
 }

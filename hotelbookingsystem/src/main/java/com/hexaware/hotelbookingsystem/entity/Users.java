@@ -20,6 +20,7 @@ public class Users {
 	private Integer phoneNumber;
 	private LocalDate dateCreated;
 	private UserRole userrole;
+	private LocalDate updatedAt;
 	
 	@OneToOne(mappedBy = "user")
     private Hotels hotel; // One-to-One mapping with Hotels (only for HOTEL_OWNER)
@@ -47,8 +48,11 @@ public class Users {
 	
 
 
+
+
+
 	public Users(Integer userId, String email, String password, String name, Integer phoneNumber, LocalDate dateCreated,
-			UserRole userrole, Hotels hotel, List<Bookings> bookings, List<Reviews> reviews,
+			UserRole userrole, LocalDate updatedAt, Hotels hotel, List<Bookings> bookings, List<Reviews> reviews,
 			List<Rooms> favoriteRooms) {
 		super();
 		this.userId = userId;
@@ -58,13 +62,12 @@ public class Users {
 		this.phoneNumber = phoneNumber;
 		this.dateCreated = dateCreated;
 		this.userrole = userrole;
+		this.updatedAt = updatedAt;
 		this.hotel = hotel;
 		this.bookings = bookings;
 		this.reviews = reviews;
 		this.favoriteRooms = favoriteRooms;
 	}
-
-
 
 	public Integer getUserId() {
 		return userId;
@@ -152,6 +155,15 @@ public class Users {
 
 	public void setFavoriteRooms(List<Rooms> favoriteRooms) {
 		this.favoriteRooms = favoriteRooms;
+	}
+
+	public LocalDate getUpdatedAt() {
+		return updatedAt;
+	}
+
+
+	public void setUpdatedAt(LocalDate updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	

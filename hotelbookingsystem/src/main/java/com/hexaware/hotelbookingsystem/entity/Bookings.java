@@ -18,7 +18,7 @@ public class Bookings {
 	    private LocalDate bookingDate; 
 	    private Integer numberOfGuests; 
 	    private String specialRequests; 
-	    private LocalDate createdAt; 
+	    
 
 	    @ManyToOne
 	    @JoinColumn(name = "user_id")
@@ -162,25 +162,14 @@ public class Bookings {
 
 	    } 
 
-	    public LocalDate getCreatedAt() { 
-
-	        return createdAt; 
-
-	    } 
-
-
-	    public void setCreatedAt(LocalDate createdAt) { 
-
-	        this.createdAt = createdAt; 
-
-	    } 
+	    
 
 		public Bookings() {
 			super();
 		}
 		public Bookings(Integer bookingId, Users user, Hotels hotel, Rooms room, LocalDate checkInDate,
 				LocalDate checkOutDate, Double totalAmount, BookingStatus bookingStatus, LocalDate bookingDate,
-				Integer numberOfGuests, String specialRequests, LocalDate createdAt) {
+				Integer numberOfGuests, String specialRequests) {
 			super();
 			this.bookingId = bookingId;
 			this.user = user;
@@ -193,7 +182,7 @@ public class Bookings {
 			this.bookingDate = bookingDate;
 			this.numberOfGuests = numberOfGuests;
 			this.specialRequests = specialRequests;
-			this.createdAt = createdAt;
+		
 		} 
 	    
 
