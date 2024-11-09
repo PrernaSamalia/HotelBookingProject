@@ -10,7 +10,7 @@
 	
 	<!-- Database connection properties - Driver, URL, user, password -->
 		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/batch2_db</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hbs</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">Ganga@422002!</property>
 	
@@ -23,7 +23,11 @@
 	
 		<mapping  class="com.hexaware.hotelbookingsystem.entity.Users"  />
 		<mapping  class="com.hexaware.hotelbookingsystem.entity.Rooms"  /> 
-		<mapping  class="com.hexaware.hotelbookingsystem.entity.Hotels"  />  
+		<mapping  class="com.hexaware.hotelbookingsystem.entity.Hotels"  />
+		<mapping  class="com.hexaware.hotelbookingsystem.entity.Payments"  />
+		<mapping  class="com.hexaware.hotelbookingsystem.entity.Bookings"  />
+		<mapping  class="com.hexaware.hotelbookingsystem.entity.Reviews"  />  
+		
 	
 
 	</session-factory>

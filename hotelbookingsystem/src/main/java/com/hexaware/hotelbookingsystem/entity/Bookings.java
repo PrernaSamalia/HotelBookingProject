@@ -2,14 +2,15 @@ package com.hexaware.hotelbookingsystem.entity;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.Id; 
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne; 
 @Entity
 public class Bookings { 
+	
 	    @Id
 	    private Integer bookingId; 
-	    private Users user; 
-	    private Hotels hotel; 
-	    private Rooms room; 
+		
 	    private LocalDate checkInDate; 
 	    private LocalDate checkOutDate; 
 	    private Double totalAmount; 
@@ -19,6 +20,25 @@ public class Bookings {
 	    private String specialRequests; 
 	    private LocalDate createdAt; 
 
+	    @ManyToOne
+	    @JoinColumn(name = "user_id")
+	    private Users user; // Many-to-One relationship with Users (for GUEST users)
+
+	    @ManyToOne
+	    @JoinColumn(name = "hotel_id")
+	    private Hotels hotel; // Many-to-One relationship with Hotels
+
+	    @ManyToOne
+	    @JoinColumn(name = "room_id")
+	    private Rooms room; // Many-to-One relationship with Rooms
+	    // Enum for bookingStatus 
+
+	    public enum BookingStatus { 
+
+	        CONFIRMED, CANCELLED, PENDING 
+
+	    }
+	    
 	    // Getters and Setters 
 	    public Integer getBookingId() { 
 
@@ -154,14 +174,6 @@ public class Bookings {
 	        this.createdAt = createdAt; 
 
 	    } 
-	    // Enum for bookingStatus 
-
-	    public enum BookingStatus { 
-
-	        CONFIRMED, CANCELLED, PENDING 
-
-	    }
-	    
 
 		public Bookings() {
 			super();

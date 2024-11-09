@@ -2,14 +2,15 @@ package com.hexaware.hotelbookingsystem.entity;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.Id; 
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne; 
 @Entity
 public class Payments { 
 
-	 
 		@Id
 	    private Integer paymentId; 
-	    private Bookings booking; 
+ 
 	    private Double paymentAmount; 
 	    private LocalDate paymentDate; 
 	    private PaymentMethod paymentMethod; 
@@ -18,6 +19,23 @@ public class Payments {
 	    private String remarks; 
 	    private LocalDate createdAt; 
 
+	    @ManyToOne
+	    @JoinColumn(name = "user_id")
+	    private Users user; // Many-to-One relationship with Users
+
+	    @ManyToOne
+	    @JoinColumn(name = "booking_id")
+	    private Bookings booking; // Many-to-One relationship with Bookings
+	    public enum PaymentMethod { 
+
+	        CREDIT_CARD, DEBIT_CARD, PAYPAL 
+
+	    } 
+	    public enum PaymentStatus { 
+
+	        SUCCESS, FAILED, PENDING 
+
+	    }
 	    // Getters and Setters 
 
 	    public Integer getPaymentId() { 
@@ -112,27 +130,21 @@ public class Payments {
 	    } 
 	    // Enums for paymentMethod and paymentStatus 
 
-	    public enum PaymentMethod { 
-
-	        CREDIT_CARD, DEBIT_CARD, PAYPAL 
-
-	    } 
-
-	    public enum PaymentStatus { 
-
-	        SUCCESS, FAILED, PENDING 
-
-	    }
-
+		
+		public Users getUser() {
+			return user;
+		}
+		public void setUser(Users user) {
+			this.user = user;
+		}
 		public Payments() {
 			super();
 		}
-		public Payments(Integer paymentId, Bookings booking, Double paymentAmount, LocalDate paymentDate,
-				PaymentMethod paymentMethod, PaymentStatus paymentStatus, String transactionId, String remarks,
-				LocalDate createdAt) {
+		public Payments(Integer paymentId, Double paymentAmount, LocalDate paymentDate, PaymentMethod paymentMethod,
+				PaymentStatus paymentStatus, String transactionId, String remarks, LocalDate createdAt, Users user,
+				Bookings booking) {
 			super();
 			this.paymentId = paymentId;
-			this.booking = booking;
 			this.paymentAmount = paymentAmount;
 			this.paymentDate = paymentDate;
 			this.paymentMethod = paymentMethod;
@@ -140,7 +152,9 @@ public class Payments {
 			this.transactionId = transactionId;
 			this.remarks = remarks;
 			this.createdAt = createdAt;
-		} 
+			this.user = user;
+			this.booking = booking;
+		}
 	    
 
 }

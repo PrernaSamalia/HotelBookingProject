@@ -1,20 +1,35 @@
 package com.hexaware.hotelbookingsystem.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Rooms {
 		@Id
-		private int roomId;            
-		private Hotels hotelId;           
-	    private int roomNumber;        
-		private String roomType;          
-		private double pricePerNight;     
-		private String availabilityStatus; 
-		private int capacity;           
+		private Integer roomId;
+          
+	    private Integer roomNumber;        
+		private RoomType roomType;          
+		private Double pricePerNight;     
+		private AvailabilityStatus availabilityStatus; 
+		private Integer capacity;           
 		private String description;
 		
+		@ManyToOne
+	    @JoinColumn(name = "hotel_id")
+	    private Hotels hotel; // Many-to-One relationship with Hotels
+
+	    @OneToMany(mappedBy = "room")
+	    private List<Bookings> bookings; // One-to-Many relationship with Bookings
+
+	    @ManyToMany(mappedBy = "favoriteRooms")
+	    private List<Users> users; // Many-to-Many relationship with Users (favorite rooms)
 		public enum RoomType {
 			SINGLE, DOUBLE, SUITE
 		}
@@ -25,72 +40,104 @@ public class Rooms {
 		public Rooms() {
 			super();
 		}
-		public Rooms(int roomId, Hotels hotelId, int roomNumber, String roomType, double pricePerNight,
-				String availabilityStatus, int capacity, String description) {
+	
+		public Rooms(Integer roomId, Integer roomNumber, RoomType roomType, Double pricePerNight,
+				AvailabilityStatus availabilityStatus, Integer capacity, String description, Hotels hotel,
+				List<Bookings> bookings, List<Users> users) {
 			super();
 			this.roomId = roomId;
-			this.hotelId = hotelId;
 			this.roomNumber = roomNumber;
 			this.roomType = roomType;
 			this.pricePerNight = pricePerNight;
 			this.availabilityStatus = availabilityStatus;
 			this.capacity = capacity;
 			this.description = description;
+			this.hotel = hotel;
+			this.bookings = bookings;
+			this.users = users;
 		}
-		public int getRoomId() {
+
+		public Integer getRoomId() {
 			return roomId;
 		}
-		public void setRoomId(int roomId) {
+
+		public void setRoomId(Integer roomId) {
 			this.roomId = roomId;
 		}
-		public Hotels getHotelId() {
-			return hotelId;
-		}
-		public void setHotelId(Hotels hotelId) {
-			this.hotelId = hotelId;
-		}
-		public int getRoomNumber() {
+
+		public Integer getRoomNumber() {
 			return roomNumber;
 		}
-		public void setRoomNumber(int roomNumber) {
+
+		public void setRoomNumber(Integer roomNumber) {
 			this.roomNumber = roomNumber;
 		}
-		public double getPricePerNight() {
+
+		public RoomType getRoomType() {
+			return roomType;
+		}
+
+		public void setRoomType(RoomType roomType) {
+			this.roomType = roomType;
+		}
+
+		public Double getPricePerNight() {
 			return pricePerNight;
 		}
-		public void setPricePerNight(double pricePerNight) {
+
+		public void setPricePerNight(Double pricePerNight) {
 			this.pricePerNight = pricePerNight;
 		}
-		public int getCapacity() {
+
+		public AvailabilityStatus getAvailabilityStatus() {
+			return availabilityStatus;
+		}
+
+		public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
+			this.availabilityStatus = availabilityStatus;
+		}
+
+		public Integer getCapacity() {
 			return capacity;
 		}
-		public void setCapacity(int capacity) {
+
+		public void setCapacity(Integer capacity) {
 			this.capacity = capacity;
 		}
+
 		public String getDescription() {
 			return description;
 		}
+
 		public void setDescription(String description) {
 			this.description = description;
 		}
-		public String getRoomType() {
-			return roomType;
+
+		public Hotels getHotel() {
+			return hotel;
 		}
-		public void setRoomType(String roomType) {
-			this.roomType = roomType;
+
+		public void setHotel(Hotels hotel) {
+			this.hotel = hotel;
 		}
-		public String getAvailabilityStatus() {
-			return availabilityStatus;
+
+		public List<Bookings> getBookings() {
+			return bookings;
 		}
-		public void setAvailabilityStatus(String availabilityStatus) {
-			this.availabilityStatus = availabilityStatus;
+
+		public void setBookings(List<Bookings> bookings) {
+			this.bookings = bookings;
 		}
-		@Override
-		public String toString() {
-			return "Rooms [roomId=" + roomId + ", hotelId=" + hotelId + ", roomNumber=" + roomNumber + ", roomType="
-					+ roomType + ", pricePerNight=" + pricePerNight + ", availabilityStatus=" + availabilityStatus
-					+ ", capacity=" + capacity + ", description=" + description + "]";
+
+		public List<Users> getUsers() {
+			return users;
 		}
+
+		public void setUsers(List<Users> users) {
+			this.users = users;
+		}
+
+		
 
 		
 
